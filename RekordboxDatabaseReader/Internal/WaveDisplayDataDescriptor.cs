@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using static RekordboxDatabaseReader.Internal.ParserHelper;
 
 namespace RekordboxDatabaseReader.Internal

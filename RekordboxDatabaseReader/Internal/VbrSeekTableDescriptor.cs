@@ -47,12 +47,4 @@ namespace RekordboxDatabaseReader.Internal
             return result;
         }
     }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public readonly struct SeekTableEntry
-    {
-        private readonly int entry;
-
-        public int Entry => ToHostOrder(entry);
-    }
 }

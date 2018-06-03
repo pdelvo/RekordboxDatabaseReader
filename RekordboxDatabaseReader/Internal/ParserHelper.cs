@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Buffers.Binary;
-using System.Collections.Generic;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -121,27 +120,5 @@ namespace RekordboxDatabaseReader.Internal
 
             return result;
         }
-    }
-
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct ColoredWaveDataPoint
-    {
-        private readonly byte data;
-
-        private const byte colorMap = 0b11100000;
-        private const byte heightMap = 0b00011111;
-
-        public byte ColorIndex => (byte)((data & colorMap) >> 5);
-        public byte Height => (byte)(data & heightMap);
-    }
-
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct NonColoredWaveDataPoint
-    {
-        private readonly byte data;
-
-        private const byte heightMap = 0b00001111;
-
-        public byte Height => (byte)(data & heightMap);
     }
 }

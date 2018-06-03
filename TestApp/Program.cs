@@ -1,11 +1,5 @@
-﻿using Microsoft.Win32.SafeHandles;
-using RekordboxDatabaseReader;
+﻿using RekordboxDatabaseReader;
 using System;
-using System.Buffers;
-using System.IO;
-using System.IO.MemoryMappedFiles;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 namespace TestApp
 {

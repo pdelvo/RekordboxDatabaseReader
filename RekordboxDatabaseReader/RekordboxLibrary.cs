@@ -1,10 +1,7 @@
-﻿using Microsoft.Win32.SafeHandles;
-using RekordboxDatabaseReader.Internal;
+﻿using RekordboxDatabaseReader.Internal;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO.MemoryMappedFiles;
-using System.Text;
 
 namespace RekordboxDatabaseReader
 {
