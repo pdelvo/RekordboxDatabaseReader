@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
-using static RekordboxDatabaseReader.ParserHelper;
+using static RekordboxDatabaseReader.Internal.ParserHelper;
 
-namespace RekordboxDatabaseReader
+namespace RekordboxDatabaseReader.Internal
 {
     public ref struct UnknownHeaderDescriptor
     {

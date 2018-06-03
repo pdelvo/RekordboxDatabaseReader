@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Text;
-using static RekordboxDatabaseReader.ParserHelper;
+using static RekordboxDatabaseReader.Internal.ParserHelper;
 
-namespace RekordboxDatabaseReader
+namespace RekordboxDatabaseReader.Internal
 {
     public ref struct FilePathDescriptor
     {
         public int HeadSize;
         public int PacketSize;
         public ReadOnlySpan<byte> FilePath;
-        private string? filePathString;
+        private string filePathString;
         public static readonly ReadOnlyMemory<byte> Tag = GetHeaderBytes("PPTH");
 
         public static FilePathDescriptor Parse(ref ReadOnlySpan<byte> buffer)
@@ -28,7 +28,7 @@ namespace RekordboxDatabaseReader
         public string GetPathString()
         {
             // Strip trailing 00
-            return filePathString ?? (filePathString = Encoding.BigEndianUnicode.GetString(FilePath.Slice(0, FilePath.Length - 2)))!;
+            return filePathString ?? (filePathString = Encoding.BigEndianUnicode.GetString(FilePath.Slice(0, FilePath.Length - 2)));
         }
     }
 }

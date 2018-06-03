@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RekordboxDatabaseReader
+namespace RekordboxDatabaseReader.Internal
 {
     public static class RekordboxFileParser
     {
@@ -61,7 +61,7 @@ namespace RekordboxDatabaseReader
                 else
                 {
                     UnknownHeaderDescriptor unknownHeaderDescriptor = UnknownHeaderDescriptor.Parse(ref file);
-                    Console.WriteLine("Unknown header: " + unknownHeaderDescriptor.GetHeaderName());
+                    // Console.WriteLine("Unknown header: " + unknownHeaderDescriptor.GetHeaderName());
                     unknownHeaderDescriptorAction?.Invoke(unknownHeaderDescriptor);
                 }
             }

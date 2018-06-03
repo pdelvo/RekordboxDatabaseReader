@@ -2,19 +2,60 @@
 using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace RekordboxDatabaseReader
+namespace RekordboxDatabaseReader.Internal
 {
     internal static class ParserHelper
     {
+        internal static T ParsePrimitive<T>(ref ReadOnlySpan<byte> buffer)
+            where T : unmanaged
+        {
+            var i = Unsafe.ReadUnaligned<T>(ref Unsafe.AsRef(buffer[0]));
+            buffer = buffer.Slice(Unsafe.SizeOf<T>());
+
+            return i;
+        }
+
+        internal static T ParsePrimitive<T>(ref ReadOnlyMemory<byte> buffer)
+            where T : unmanaged
+        {
+            var i = Unsafe.ReadUnaligned<T>(ref Unsafe.AsRef(buffer.Span[0]));
+            buffer = buffer.Slice(Unsafe.SizeOf<T>());
+
+            return i;
+        }
+
+        internal static T ParsePrimitive<T>(ReadOnlySpan<byte> buffer)
+            where T : unmanaged
+        {
+            var i = Unsafe.ReadUnaligned<T>(ref Unsafe.AsRef(buffer[0]));
+            return i;
+        }
+
+        internal static T ParsePrimitive<T>(ReadOnlyMemory<byte> buffer)
+            where T : unmanaged
+        {
+            var i = Unsafe.ReadUnaligned<T>(ref Unsafe.AsRef(buffer.Span[0]));
+            return i;
+        }
+
         internal static int ParseInt(ref ReadOnlySpan<byte> buffer)
         {
             int i = BinaryPrimitives.ReadInt32BigEndian(buffer);
             buffer = buffer.Slice(4);
 
             return i;
+        }
+
+        internal static uint ParseUInt(ref ReadOnlySpan<byte> buffer)
+        {
+            int i = BinaryPrimitives.ReadInt32BigEndian(buffer);
+            buffer = buffer.Slice(4);
+
+            return (uint)i;
         }
 
         internal static short ParseShort(ref ReadOnlySpan<byte> buffer)
@@ -82,7 +123,7 @@ namespace RekordboxDatabaseReader
         }
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct ColoredWaveDataPoint
     {
         private readonly byte data;
@@ -94,7 +135,7 @@ namespace RekordboxDatabaseReader
         public byte Height => (byte)(data & heightMap);
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct NonColoredWaveDataPoint
     {
         private readonly byte data;

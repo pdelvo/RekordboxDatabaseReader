@@ -1,7 +1,7 @@
 ﻿using System;
-using static RekordboxDatabaseReader.ParserHelper;
+using static RekordboxDatabaseReader.Internal.ParserHelper;
 
-namespace RekordboxDatabaseReader
+namespace RekordboxDatabaseReader.Internal
 {
     public struct MainFileDescriptor
     {

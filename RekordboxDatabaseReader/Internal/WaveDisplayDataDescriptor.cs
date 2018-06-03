@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using static RekordboxDatabaseReader.ParserHelper;
+using static RekordboxDatabaseReader.Internal.ParserHelper;
 
-namespace RekordboxDatabaseReader
+namespace RekordboxDatabaseReader.Internal
 {
     public ref struct WaveDisplayDataDescriptor<T>
         where T: struct

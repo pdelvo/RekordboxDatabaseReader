@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using static RekordboxDatabaseReader.ParserHelper;
+using static RekordboxDatabaseReader.Internal.ParserHelper;
 
-namespace RekordboxDatabaseReader
+namespace RekordboxDatabaseReader.Internal
 {
     public ref struct QuantizedTimeZonesDescriptor
     {
@@ -41,7 +41,7 @@ namespace RekordboxDatabaseReader
         }
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct QuantizedPoint
     {
         private readonly short beatPhase;
