@@ -1,5 +1,4 @@
-﻿using RekordboxDatabaseReader.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -11,15 +10,23 @@ namespace RekordboxDatabaseReader
 
         ReadOnlyCollection<Internal.Block> blocks;
 
+        ReadOnlyCollection<Track> tracks;
+        ReadOnlyCollection<Artist> artists;
+
         public RekordboxLibrary(string path)
             : base(path)
         {
             ReadOnlyMemory<byte> memory = this.Memory;
-            blocks = PdbParser.Parse(ref memory);
+            blocks = Internal.PdbParser.Parse(ref memory);
+
+            LoadData();
         }
 
-        public IEnumerable<Track> ListTracks()
+        private void LoadData()
         {
+            var tracks = new List<Track>();
+            var artists = new List<Artist>();
+
             for (int i = 0; i < blocks.Count; i++)
             {
                 var block = blocks[i];
@@ -27,13 +34,32 @@ namespace RekordboxDatabaseReader
                 for (int j = 0; j < block.Rows.Length; j++)
                 {
                     var row = block.Rows.Span[j];
+                    // Console.WriteLine("Row Table Id: " + row.TableId);
 
                     if (row.TableId == Internal.Track.TableId)
                     {
-                        yield return Track.FromRow(this, row);
+                        tracks.Add(Track.FromRow(this, row));
+                    }
+
+                    if (row.TableId == Internal.Artist.TableId)
+                    {
+                        artists.Add(Artist.FromRow(this, row));
                     }
                 }
             }
+
+            this.tracks = tracks.AsReadOnly();
+            this.artists = artists.AsReadOnly();
+        }
+
+        public ReadOnlyCollection<Track> Tracks
+        {
+            get => tracks;
+        }
+
+        public ReadOnlyCollection<Artist> Artists
+        {
+            get => artists;
         }
     }
 }

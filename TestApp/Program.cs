@@ -7,13 +7,18 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            using (var device = new RekordboxDevice(@"I:"))
+            using (var device = new RekordboxDevice(@"D:\\RB"))
             {
                 var library = device.Library;
 
-                foreach (var item in library.ListTracks())
+                foreach (var item in library.Tracks)
                 {
-                    Console.WriteLine($"Name: {item.Name}, Path: {item.Path}");
+                    Console.WriteLine($"Name: {item.Name}, Path: {item.Path}, Artist Id: {item.ArtistId}");
+                }
+
+                foreach (var item in library.Artists)
+                {
+                    Console.WriteLine($"Name: {item.Name}, Artist Id: {item.ArtistId}");
                 }
             }
         }

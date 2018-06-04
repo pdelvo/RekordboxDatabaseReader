@@ -15,10 +15,11 @@ namespace RekordboxDatabaseReader
 
         protected RekordboxFile(string path)
         {
-            Path = path;
+            Path = System.IO.Path.GetFullPath(path);
 
-            memoryMappedFile = MemoryMappedFile.CreateFromFile(System.IO.Path.GetFullPath(path), FileMode.Open);
-            memoryManager = new MemoryMappedFileMemoryManager(memoryMappedFile, new FileInfo(path).Length);
+            long size = new FileInfo(Path).Length;
+            memoryMappedFile = MemoryMappedFile.CreateFromFile(File.Open(Path, FileMode.Open, FileAccess.Read, FileShare.Read), null, size, MemoryMappedFileAccess.Read, HandleInheritability.None, false);
+            memoryManager = new MemoryMappedFileMemoryManager(memoryMappedFile, size);
         }
 
         public void Dispose()

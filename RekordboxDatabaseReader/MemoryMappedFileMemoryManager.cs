@@ -14,7 +14,7 @@ namespace RekordboxDatabaseReader
         public MemoryMappedFileMemoryManager(MemoryMappedFile file, long size)
         {
             this.file = file;
-            this.mma = file.CreateViewAccessor(0, size).SafeMemoryMappedViewHandle;
+            this.mma = file.CreateViewAccessor(0, size, MemoryMappedFileAccess.Read).SafeMemoryMappedViewHandle;
         }
 
         public unsafe override Span<byte> GetSpan()
