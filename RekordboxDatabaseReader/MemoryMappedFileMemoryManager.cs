@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace RekordboxDatabaseReader
 {
-    internal class MemoryMappedFileMemoryManager : MemoryManager<byte>
+    internal sealed class MemoryMappedFileMemoryManager : MemoryManager<byte>
     {
         private readonly MemoryMappedFile file;
         private SafeMemoryMappedViewHandle mma;

@@ -2,7 +2,7 @@
 
 namespace RekordboxDatabaseReader
 {
-    public partial class RekordboxDevice : IDisposable
+    public sealed class RekordboxDevice : IDisposable
     {
         public string Path { get; }
         public RekordboxLibrary Library { get; }

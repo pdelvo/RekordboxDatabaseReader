@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace RekordboxDatabaseReader
 {
-    public class RekordboxLibrary : RekordboxFile
+    public sealed class RekordboxLibrary : RekordboxFile
     {
         public const string DefaultRelativePath = @"PIONEER/rekordbox/export.pdb";
 

@@ -3,7 +3,7 @@ using IOPath = System.IO.Path;
 
 namespace RekordboxDatabaseReader
 {
-    public class Track : RekordboxFile
+    public sealed class Track : RekordboxFile
     {
         public string Name { get; }
 

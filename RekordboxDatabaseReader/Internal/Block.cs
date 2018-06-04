@@ -3,7 +3,7 @@ using static RekordboxDatabaseReader.Internal.ParserHelper;
 
 namespace RekordboxDatabaseReader.Internal
 {
-    public class Block
+    public sealed class Block
     {
         public uint Zero;
         public uint BlockId;

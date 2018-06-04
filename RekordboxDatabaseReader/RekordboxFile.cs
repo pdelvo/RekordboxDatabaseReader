@@ -4,7 +4,7 @@ using System.IO.MemoryMappedFiles;
 
 namespace RekordboxDatabaseReader
 {
-    public class RekordboxFile : IDisposable
+    public abstract class RekordboxFile : IDisposable
     {
         public string Path { get; }
 

@@ -3,7 +3,7 @@
 namespace RekordboxDatabaseReader
 {
     [Serializable]
-    public class ParseException : Exception
+    public sealed class ParseException : Exception
     {
         public ParseException() { }
         public ParseException(string message) : base(message) { }
